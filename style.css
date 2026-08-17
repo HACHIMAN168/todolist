@@ -1,0 +1,644 @@
+/* ===== 基础重置 ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #3b82f6;
+  --primary-dark: #2563eb;
+  --primary-light: #eff6ff;
+  --accent: #60a5fa;
+  --text: #1e293b;
+  --text-muted: #94a3b8;
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
+  --danger-soft: #fee2e2;
+  --card-bg: #ffffff;
+  --border: #dbeafe;
+  --shadow: 0 10px 30px rgba(99, 102, 241, 0.14);
+  --shadow-sm: 0 4px 12px rgba(99, 102, 241, 0.10);
+  --radius: 14px;
+  --radius-sm: 10px;
+
+  /* 优先级配色 */
+  --pri-high: #ef4444;
+  --pri-high-bg: #fee2e2;
+  --pri-high-border: #fecaca;
+  --pri-medium: #f59e0b;
+  --pri-medium-bg: #fef3c7;
+  --pri-medium-border: #fde68a;
+  --pri-low: #3b82f6;
+  --pri-low-bg: #dbeafe;
+  --pri-low-border: #bfdbfe;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  /* 浅蓝 → 浅紫 渐变背景 */
+  background: linear-gradient(165deg, #dbeafe 0%, #e6f0ff 40%, #ede9fe 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 16px;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== 主容器 ===== */
+.container {
+  width: 100%;
+  max-width: 560px;
+  background: var(--card-bg);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  padding: 32px 28px;
+  border: 1px solid var(--border);
+}
+
+/* ===== 头部 ===== */
+.app-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.app-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  letter-spacing: 0.5px;
+}
+
+.subtitle {
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ===== 统计卡片 ===== */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: var(--primary-light);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 8px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-number {
+  display: block;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.2;
+}
+
+.stat-label {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ===== 输入表单 ===== */
+.todo-form {
+  margin-bottom: 22px;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+}
+
+.todo-form input[type="text"] {
+  flex: 1;
+  min-width: 0;
+  padding: 14px 16px;
+  font-size: 15px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: #f8fbff;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.todo-form input::placeholder {
+  color: #b6c6e0;
+}
+
+.todo-form input:focus {
+  border-color: var(--primary);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+}
+
+.btn-add {
+  padding: 14px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-add:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.3);
+}
+
+.btn-add:active {
+  transform: translateY(0);
+}
+
+.btn-add:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ===== 优先级选择 ===== */
+.priority-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.priority-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.priority-select {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pri-btn {
+  padding: 5px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: #f8fbff;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease, transform 0.15s ease;
+}
+
+.pri-btn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.pri-btn:active {
+  transform: scale(0.95);
+}
+
+.pri-btn.active.pri-opt-high {
+  background: var(--pri-high);
+  border-color: var(--pri-high);
+  color: #ffffff;
+}
+
+.pri-btn.active.pri-opt-medium {
+  background: var(--pri-medium);
+  border-color: var(--pri-medium);
+  color: #ffffff;
+}
+
+.pri-btn.active.pri-opt-low {
+  background: var(--pri-low);
+  border-color: var(--pri-low);
+  color: #ffffff;
+}
+
+/* ===== 任务分区 ===== */
+.lists {
+  margin-top: 2px;
+}
+
+.list-section + .list-section {
+  margin-top: 28px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.section-header h2 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+.section-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 数量小徽章 */
+.section-count {
+  min-width: 24px;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary-dark);
+  background: var(--primary-light);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  text-align: center;
+}
+
+/* 清空已完成按钮 */
+.btn-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--danger);
+  background: var(--danger-soft);
+  border: 1px solid #fecaca;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.btn-clear:hover:not(:disabled) {
+  background: #fecaca;
+  box-shadow: 0 3px 8px rgba(239, 68, 68, 0.2);
+  transform: translateY(-1px);
+}
+
+.btn-clear:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-clear:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ===== 任务列表 ===== */
+.todo-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  background: #f8fbff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: box-shadow 0.2s ease, transform 0.2s ease, opacity 0.3s ease;
+  animation: slideIn 0.25s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.todo-item:hover {
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+/* 已完成列表里的条目：更淡的背景，视觉上"收起来" */
+.todo-item.completed {
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+}
+
+.todo-item.completed:hover {
+  box-shadow: 0 4px 10px rgba(100, 116, 139, 0.12);
+}
+
+/* 优先级：左侧色条（放在 .completed 之后，保证覆盖左侧颜色） */
+.todo-item.priority-high {
+  border-left: 4px solid var(--pri-high);
+}
+
+.todo-item.priority-medium {
+  border-left: 4px solid var(--pri-medium);
+}
+
+.todo-item.priority-low {
+  border-left: 4px solid var(--pri-low);
+}
+
+/* 优先级小徽章 */
+.priority-badge {
+  flex-shrink: 0;
+  padding: 2px 9px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+
+.priority-badge.priority-high {
+  background: var(--pri-high-bg);
+  color: var(--pri-high);
+  border-color: var(--pri-high-border);
+}
+
+.priority-badge.priority-medium {
+  background: var(--pri-medium-bg);
+  color: var(--pri-medium);
+  border-color: var(--pri-medium-border);
+}
+
+.priority-badge.priority-low {
+  background: var(--pri-low-bg);
+  color: var(--pri-low);
+  border-color: var(--pri-low-border);
+}
+
+.todo-item.completed .priority-badge {
+  opacity: 0.55;
+}
+
+/* 自定义复选框 */
+.todo-item input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  border: 2px solid var(--accent);
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  margin: 0;
+}
+
+.todo-item input[type="checkbox"]:checked {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.todo-item input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.todo-item input[type="checkbox"]:focus-visible {
+  outline: 3px solid rgba(59, 130, 246, 0.3);
+}
+
+.todo-text {
+  flex: 1;
+  min-width: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  word-break: break-word;
+  transition: color 0.2s ease;
+}
+
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+/* 行内编辑输入框 */
+.edit-input {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 10px;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--text);
+  background: #ffffff;
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+}
+
+/* 编辑按钮 */
+.btn-edit {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+}
+
+.btn-edit:hover {
+  color: var(--primary-dark);
+  background: var(--primary-light);
+}
+
+.btn-edit:active {
+  transform: scale(0.9);
+}
+
+.btn-delete {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+}
+
+.btn-delete:hover {
+  color: var(--danger-hover);
+  background: #fee2e2;
+}
+
+.btn-delete:active {
+  transform: scale(0.9);
+}
+
+/* 删除时的淡出动画 */
+.todo-item.removing {
+  opacity: 0;
+  transform: translateX(16px);
+}
+
+/* ===== 空状态提示 ===== */
+.empty-tip {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+  padding: 24px 0 8px;
+}
+
+/* 整个清单为空时的大提示 */
+.empty-state {
+  text-align: center;
+  padding: 36px 0 24px;
+}
+
+.empty-icon {
+  font-size: 44px;
+  margin-bottom: 10px;
+}
+
+.empty-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+
+.empty-sub {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ===== 底部操作区 ===== */
+.footer-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 26px;
+}
+
+.btn-clear-all {
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--danger);
+  background: transparent;
+  border: 1px solid var(--pri-high-border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.btn-clear-all:hover:not(:disabled) {
+  background: var(--danger-soft);
+  box-shadow: 0 3px 8px rgba(239, 68, 68, 0.18);
+  transform: translateY(-1px);
+}
+
+.btn-clear-all:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-clear-all:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ===== 隐藏 ===== */
+.hidden,
+.lists.hidden,
+.list-section.hidden,
+.empty-state.hidden,
+.empty-tip.hidden {
+  display: none;
+}
+
+/* ===== 响应式：手机 ===== */
+@media (max-width: 480px) {
+  body {
+    padding: 16px 10px;
+  }
+
+  .container {
+    padding: 22px 16px;
+    border-radius: 20px;
+  }
+
+  .app-header h1 {
+    font-size: 24px;
+  }
+
+  .stat-number {
+    font-size: 22px;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .btn-add {
+    width: 100%;
+    padding: 13px;
+  }
+
+  .priority-row {
+    flex-wrap: wrap;
+    row-gap: 6px;
+  }
+
+  .todo-item {
+    padding: 11px 12px;
+  }
+
+  .section-header {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+}
